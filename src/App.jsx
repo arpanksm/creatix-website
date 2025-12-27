@@ -31,7 +31,7 @@ const servicesData = [
         icon: 'Globe',
         shortDesc: 'Custom, responsive, and high-performance websites.',
         longDesc: 'Choose the perfect technology stack for your business. We offer specialized packages for WordPress, Shopify, and Custom Development designed to scale with you.',
-        rate: 'Starts ₹999',
+        rate: 'Starts ₹2,999',
         hasPackages: true,
         subCategories: [
             {
@@ -43,17 +43,50 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "2,999", 
-                        features: ["1-3 Pages Website", "Free Theme Installation", "Mobile Responsive Design", "Contact Form Setup", "Social Media Linking", "1 Week Support"] 
+                        features: [
+                            "1-3 Pages Professional Setup", 
+                            "Free Theme Installation", 
+                            "Mobile & Tablet Responsive Design", 
+                            "Contact Form with Email Alerts", 
+                            "Social Media Icons Integration", 
+                            "WhatsApp Chat Button Setup", 
+                            "Basic Speed Optimization",
+                            "1 Round of Revisions",
+                            "5-7 Days Delivery Time",
+                            "Note: Hosting & Domain Charged Extra"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "7,999", 
-                        features: ["5-7 Pages Website", "Premium Theme Setup", "Basic SEO Optimization", "Speed Optimization", "WhatsApp Chat Integration", "1 Month Support"] 
+                        features: [
+                            "Everything in Basic +",
+                            "5-7 Pages Complete Website", 
+                            "Premium Theme Setup (License Extra)", 
+                            "Yoast SEO Plugin Configuration", 
+                            "Advanced Speed Caching Setup", 
+                            "Security Firewall (Wordfence)", 
+                            "Google Analytics Integration",
+                            "Image Compression Setup",
+                            "1 Month Technical Support",
+                            "Note: Hosting & Domain Charged Extra"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "14,999", 
-                        features: ["10+ Pages / E-commerce", "Custom Design Elements", "Payment Gateway Setup", "Advanced SEO Setup", "Security Firewall", "3 Months Support"] 
+                        features: [
+                            "Everything in Standard +",
+                            "10-15 Pages / E-commerce Setup", 
+                            "WooCommerce Payment Gateway", 
+                            "Custom CSS / Design Elements", 
+                            "Product Filtering & Search", 
+                            "User Login/Register System", 
+                            "Automated Backup Setup", 
+                            "Pop-up / Lead Gen Form",
+                            "3 Months Priority Support",
+                            "Note: Hosting & Domain Charged Extra"
+                        ] 
                     }
                 ]
             },
@@ -66,17 +99,49 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "999", 
-                        features: ["Store Setup & Config", "Free Theme Install", "Up to 5 Products Upload", "Payment Gateway Setup", "Standard Apps Install", "Domain Connection"] 
+                        features: [
+                            "Store Setup & Account Config", 
+                            "Free Theme Installation", 
+                            "Up to 5 Products Listing", 
+                            "Payment Gateway Integration", 
+                            "Standard Shipping Rates Setup", 
+                            "Legal Pages (Privacy/Refund)", 
+                            "Menu & Navigation Setup",
+                            "Domain Connection Support",
+                            "Note: Shopify Plan Billed to Client"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "4,999", 
-                        features: ["Premium Theme Customization", "Up to 20 Products Upload", "Collection Organization", "Basic SEO Setup", "Newsletter Popup", "1 Month Support"] 
+                        features: [
+                            "Everything in Basic +",
+                            "Premium Theme Setup (License Extra)", 
+                            "Up to 25 Products Listing", 
+                            "Collection & Category Organization", 
+                            "Basic SEO (Meta Titles/Desc)", 
+                            "Newsletter / Email Signup Popup", 
+                            "Product Review App Setup", 
+                            "Trust Badges Integration",
+                            "1 Month Store Support",
+                            "Note: Shopify Plan Billed to Client"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "9,999", 
-                        features: ["Custom Store Design", "50+ Products Upload", "Advanced App Integration", "Sales Channel Setup", "Abandoned Cart Recovery", "Priority Support"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Custom Liquid Code Modifications", 
+                            "50+ Products Bulk Upload", 
+                            "Advanced App Integration (Upsell)", 
+                            "Abandoned Cart Recovery Setup", 
+                            "Instagram/Facebook Shop Sync", 
+                            "Order Tracking Page Setup", 
+                            "Speed Optimization Audit",
+                            "Priority Chat Support",
+                            "Note: Shopify Plan Billed to Client"
+                        ] 
                     }
                 ]
             },
@@ -89,17 +154,50 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "4,999", 
-                        features: ["Single Page / Landing Page", "HTML5/CSS3/React Basic", "Fast Loading Speed", "Contact Form", "Hosting Setup", "Basic Animations"] 
+                        features: [
+                            "Single Page / Landing Page Dev", 
+                            "HTML5/CSS3/React Clean Code", 
+                            "Mobile Responsive Layout", 
+                            "Fast Loading Speed Optimization", 
+                            "Contact Form (EmailJS)", 
+                            "Scroll Animations (Basic)", 
+                            "Social Media Links",
+                            "Source Code Handover",
+                            "Note: UI Design Charged Extra",
+                            "Note: Deployment Costs Extra"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "14,999", 
-                        features: ["Multi-page Website (5)", "Dynamic Content (React)", "Admin Dashboard Basic", "Database Integration", "API Integration", "2 Months Support"] 
+                        features: [
+                            "Everything in Basic +",
+                            "5-7 Pages Multi-page Website", 
+                            "Figma to React Implementation", 
+                            "CMS Integration (Sanity/Strapi)", 
+                            "Interactive Animations (Framer)", 
+                            "Dynamic Routing Setup", 
+                            "SEO Friendly Structure (Next.js)", 
+                            "API Integration (Basic)", 
+                            "1 Month Maintenance",
+                            "Note: UI Design Charged Extra"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "29,999", 
-                        features: ["Full Stack Application", "Complex Database Architecture", "User Authentication", "Payment Gateway API", "High Scalability", "6 Months Support"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Full Stack Architecture (MERN)", 
+                            "Complex Database Design (MongoDB)", 
+                            "Secure User Authentication", 
+                            "Payment Gateway API Integration", 
+                            "Admin Dashboard Development", 
+                            "Search & Filter Functionality", 
+                            "Cloud Deployment (AWS/Vercel)", 
+                            "3 Months Bug Fix Support",
+                            "Note: UI Design Charged Extra"
+                        ] 
                     }
                 ]
             }
@@ -128,17 +226,50 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "3,999", 
-                        features: ["5 Keywords Targeting", "On-Page Optimization", "Google My Business Setup", "Basic Competitor Analysis", "Monthly Performance Report", "Meta Tags Update"] 
+                        features: [
+                            "5 Focus Keywords Targeting", 
+                            "On-Page Optimization (Titles/Tags)", 
+                            "Google My Business Setup", 
+                            "Google Search Console Setup", 
+                            "Basic Competitor Analysis", 
+                            "Robots.txt & Sitemap Creation", 
+                            "Image Alt Text Optimization", 
+                            "Monthly Performance Report",
+                            "Broken Link Check",
+                            "Note: Min 3 Months Recommended"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "9,999", 
-                        features: ["15 Keywords Targeting", "Technical SEO Audit", "Quality Backlinks (5/mo)", "Content Optimization", "Broken Link Fixing", "Bi-Weekly Reporting"] 
+                        features: [
+                            "Everything in Basic +",
+                            "15 Focus Keywords Targeting", 
+                            "Technical SEO Audit & Fixes", 
+                            "5 High Quality Backlinks/mo", 
+                            "Existing Content Optimization", 
+                            "Schema Markup Implementation", 
+                            "Internal Linking Strategy", 
+                            "Local SEO Citation Building", 
+                            "Bi-Weekly Progress Report",
+                            "Mobile Usability Fixes"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "19,999", 
-                        features: ["30+ Keywords Targeting", "Advanced Link Building", "Blog Content Creation (2/mo)", "Schema Markup Implementation", "Conversion Rate Optimization", "Weekly Strategy Calls"] 
+                        features: [
+                            "Everything in Standard +",
+                            "30+ Focus Keywords Targeting", 
+                            "Advanced Link Building Strategy", 
+                            "2 SEO-Optimized Blogs (800 words)", 
+                            "Core Web Vitals Optimization", 
+                            "Conversion Rate Optimization (CRO)", 
+                            "Guest Posting Outreach", 
+                            "Competitor Gap Analysis", 
+                            "Weekly Strategy Calls",
+                            "Dedicated Account Manager"
+                        ] 
                     }
                 ]
             }
@@ -167,17 +298,50 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "14,999", 
-                        features: ["Web-view App / Simple Wrapper", "Android .APK File", "Splash Screen Setup", "Push Notifications (Basic)", "App Icon Design", "Submission Guidance"] 
+                        features: [
+                            "WebView / Wrapper Application", 
+                            "Convert Website to Android App", 
+                            "Splash Screen Configuration", 
+                            "App Icon Setup", 
+                            "Basic Push Notifications", 
+                            "Pull-to-Refresh Functionality", 
+                            "Internet Connectivity Check", 
+                            "APK File Generation",
+                            "Note: UI Design Charged Extra",
+                            "Note: Play Console Fee ($25) Extra"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "49,999", 
-                        features: ["React Native / Flutter App", "Up to 5 Screens", "User Authentication (Firebase)", "API Integration", "Google Maps Integration", "3 Months Bug Fixes"] 
+                        features: [
+                            "React Native / Flutter Development", 
+                            "Up to 5 Custom Screens Setup", 
+                            "Firebase User Authentication", 
+                            "Google Maps / Location API", 
+                            "Custom Navigation Menu", 
+                            "Dynamic API Integration", 
+                            "Social Media Login", 
+                            "Store Upload Assistance",
+                            "Note: UI Design Charged Extra",
+                            "Note: Play Console Fee Extra"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "99,999", 
-                        features: ["Full Custom App Architecture", "Complex Backend (Node.js)", "Payment Gateway Integration", "Admin Panel Setup", "In-App Purchases", "6 Months Priority Support"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Full Custom Backend (Node.js)", 
+                            "Admin Panel for Management", 
+                            "Payment Gateway Integration", 
+                            "In-App Purchases / Subscriptions", 
+                            "Real-time Chat / Notifications", 
+                            "Complex Database Structure", 
+                            "IOS Version Generation", 
+                            "4 Months Priority Support",
+                            "Note: Server Costs Billed to Client"
+                        ] 
                     }
                 ]
             }
@@ -206,17 +370,50 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "4,999", 
-                        features: ["2 Platforms Managed", "8 High-Quality Posts/mo", "Basic Caption Writing", "Hashtag Research", "Monthly Scheduling", "Profile Optimization"] 
+                        features: [
+                            "2 Social Platforms Managed", 
+                            "8 High-Quality Static Posts/mo", 
+                            "Basic Caption Copywriting", 
+                            "Niche Hashtag Research", 
+                            "Monthly Content Scheduling", 
+                            "Profile Bio Optimization", 
+                            "Basic Highlights Cover Design", 
+                            "1 Round of Revisions",
+                            "No Community Management",
+                            "Monthly Insights Report"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "14,999", 
-                        features: ["3 Platforms Managed", "15 Posts + 4 Reels/mo", "Community Management", "Custom Graphic Design", "Monthly Strategy Call", "Ad Campaign Setup (Ad spend extra)"] 
+                        features: [
+                            "Everything in Basic +",
+                            "3 Social Platforms Managed", 
+                            "12 Static Posts + 4 Reels/mo", 
+                            "Community Mgmt (Reply to Comments)", 
+                            "Custom Branded Graphic Design", 
+                            "Story Updates (2/week)", 
+                            "Monthly Strategy Call", 
+                            "Ad Manager Account Setup", 
+                            "Competitor Ad Analysis",
+                            "Note: Ad Budget Billed to Client"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "29,999", 
-                        features: ["All Platforms Managed", "Daily Content (Posts/Stories)", "8 Professional Reels/mo", "Influencer Outreach", "Advanced Ad Management", "24/7 Reputation Management"] 
+                        features: [
+                            "Everything in Standard +",
+                            "All Major Platforms Managed", 
+                            "Daily Content (Post/Story/Reel)", 
+                            "8 Professional Reels per Month", 
+                            "Influencer Outreach Strategy", 
+                            "Advanced Ad Campaign Management", 
+                            "24/7 Reputation Management", 
+                            "Crisis Management Support", 
+                            "On-Site Content Creation (Local)",
+                            "Note: Ad Budget Billed to Client"
+                        ] 
                     }
                 ]
             }
@@ -245,17 +442,47 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "999", 
-                        features: ["Up to 30 Sec Duration", "Simple Cuts & Transitions", "Royalty Free Music", "Basic Text Overlays", "Color Correction", "2 Revisions"] 
+                        features: [
+                            "Up to 30 Sec Duration", 
+                            "Simple Jump Cuts", 
+                            "Royalty Free Background Music", 
+                            "Basic Text Overlays", 
+                            "Standard Color Correction", 
+                            "Aspect Ratio Conversion (9:16)", 
+                            "Audio Noise Reduction", 
+                            "2 Rounds of Revisions",
+                            "Delivery in 24-48 Hours"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "2,499", 
-                        features: ["Up to 60 Sec Duration", "Dynamic Transitions", "Sound Effects Design", "Motion Graphics Text", "Trending Styles", "Unlimited Revisions"] 
+                        features: [
+                            "Everything in Basic +",
+                            "Up to 60 Sec Duration", 
+                            "Dynamic Transitions (Zoom/Spin)", 
+                            "Sound Effects Design (SFX)", 
+                            "Motion Graphics Text", 
+                            "Trending Viral Styles", 
+                            "B-Roll Integration", 
+                            "Beat Sync Editing",
+                            "Unlimited Revisions"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "4,999", 
-                        features: ["Advanced Visual Effects", "Custom Animations", "Subtitles/Captions", "Stock Footage Integration", "Thumbnail Design", "Source File Included"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Advanced Visual Effects (VFX)", 
+                            "Custom 2D/3D Animations", 
+                            "Engaging Subtitles/Captions", 
+                            "Premium Stock Footage", 
+                            "Clickbait Thumbnail Design", 
+                            "Source File Included (Premiere/AE)", 
+                            "Dedicated Senior Editor", 
+                            "4K Export Quality"
+                        ] 
                     }
                 ]
             },
@@ -268,17 +495,48 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "2,999", 
-                        features: ["Up to 5 Mins", "Narrative Cutting", "Background Music", "Basic Titles", "Audio Cleaning", "1 Revision"] 
+                        features: [
+                            "Up to 5 Mins Duration", 
+                            "Narrative Story Cutting", 
+                            "Background Music Selection", 
+                            "Basic Titles & Lower Thirds", 
+                            "Audio Cleaning & Leveling", 
+                            "Color Balance Adjustment", 
+                            "Green Screen Removal (Basic)", 
+                            "1 Round of Revisions",
+                            "Full HD (1080p) Export"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "6,999", 
-                        features: ["Up to 15 Mins", "Multi-Cam Editing", "Advanced Color Grading", "Lower Thirds", "Intro/Outro Setup", "3 Revisions"] 
+                        features: [
+                            "Everything in Basic +",
+                            "Up to 15 Mins Duration", 
+                            "Multi-Cam Sync & Editing", 
+                            "Advanced Color Grading (Log)", 
+                            "Custom Animated Intro/Outro", 
+                            "Zoom & Pan Effects", 
+                            "Pattern Interrupts", 
+                            "Sound Design & Mixing",
+                            "3 Rounds of Revisions"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "14,999", 
-                        features: ["Up to 30 Mins", "Documentary Style", "Advanced Sound Design", "4K Rendering", "Animation Integration", "Dedicated Editor"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Up to 30 Mins Duration", 
+                            "Cinematic Documentary Style", 
+                            "Advanced Audio Engineering", 
+                            "4K High Bitrate Rendering", 
+                            "Custom Motion Graphics", 
+                            "Animation Integration", 
+                            "Dedicated Creative Director", 
+                            "Thumbnail Design Included",
+                            "Source Project Files"
+                        ] 
                     }
                 ]
             }
@@ -307,17 +565,102 @@ const servicesData = [
                     { 
                         name: "Basic", 
                         price: "999", 
-                        features: ["2 Professional Logo Concepts", "High Res JPG/PNG", "Transparent Background", "Color Palette", "2 Days Delivery", "1 Revision"] 
+                        features: [
+                            "2 Professional Logo Concepts", 
+                            "High Res JPG & PNG Files", 
+                            "Transparent Background File", 
+                            "Standard Color Palette", 
+                            "2 Days Delivery Time", 
+                            "1 Round of Revisions", 
+                            "Usage Rights for Digital", 
+                            "Watermark-Free Final File",
+                            "Note: No Source/Vector Files"
+                        ] 
                     },
                     { 
                         name: "Standard", 
                         price: "2,999", 
-                        features: ["4 Logo Concepts", "Vector/Source Files (AI/EPS)", "3D Mockup", "Social Media Kit", "Typography Guidelines", "Unlimited Revisions"] 
+                        features: [
+                            "Everything in Basic +",
+                            "4 Unique Logo Concepts", 
+                            "Vector Source Files (AI/EPS/SVG)", 
+                            "3D Mockup Presentation", 
+                            "Social Media Profile Kit", 
+                            "Typography & Fonts Guide", 
+                            "Print-Ready Files (CMYK)", 
+                            "Unlimited Revisions",
+                            "Priority Support"
+                        ] 
                     },
                     { 
                         name: "Premium", 
                         price: "6,999", 
-                        features: ["Complete Brand Identity", "Stationery Design (Card, Letterhead)", "Social Media Templates", "Brand Book / Style Guide", "Copyright Ownership", "Priority Support"] 
+                        features: [
+                            "Everything in Standard +",
+                            "Complete Brand Identity System", 
+                            "Stationery Design (Business Card)", 
+                            "Letterhead & Envelope Design", 
+                            "5 Social Media Post Templates", 
+                            "Comprehensive Brand Book", 
+                            "Copyright Ownership Transfer", 
+                            "Favicon Design",
+                            "VIP Support"
+                        ] 
+                    }
+                ]
+            },
+            {
+                id: 'ui-ux',
+                name: "UI/UX Design",
+                icon: "Layout",
+                description: "User-centric interfaces for Web & Mobile.",
+                plans: [
+                    { 
+                        name: "Basic", 
+                        price: "4,999", 
+                        features: [
+                            "Wireframes & User Flow Creation", 
+                            "1-3 Screens (Landing Page)", 
+                            "Low Fidelity Prototyping", 
+                            "Standard Color Palette Setup", 
+                            "Typography Selection", 
+                            "Figma Source File Included", 
+                            "Exportable Assets (SVG/PNG)", 
+                            "1 Round of Revisions",
+                            "Note: No Coding/Development"
+                        ] 
+                    },
+                    { 
+                        name: "Standard", 
+                        price: "14,999", 
+                        features: [
+                            "Everything in Basic +",
+                            "High Fidelity UI Design", 
+                            "5-10 Screens (Web or App)", 
+                            "Interactive Clickable Prototype", 
+                            "Mobile Responsive Layouts", 
+                            "Basic Style Guide Creation", 
+                            "Iconography Set", 
+                            "Developer Handoff Support",
+                            "Unlimited Revisions",
+                            "Note: No Coding/Development"
+                        ] 
+                    },
+                    { 
+                        name: "Premium", 
+                        price: "29,999", 
+                        features: [
+                            "Everything in Standard +",
+                            "Complete Design System", 
+                            "20+ Screens (Complex Flows)", 
+                            "Advanced Prototyping (Logic)", 
+                            "User Journey Mapping", 
+                            "Dark/Light Mode Versions", 
+                            "Custom Illustration Assets", 
+                            "Usability Testing Session", 
+                            "Priority Delivery",
+                            "Note: No Coding/Development"
+                        ] 
                     }
                 ]
             }
@@ -329,7 +672,6 @@ const servicesData = [
         ]
     }
 ];
-
 const faqs = [
     {
         question: "Why is there a non-refundable booking fee?",
@@ -338,6 +680,14 @@ const faqs = [
     {
         question: "What happens after I pay the booking fee?",
         answer: "Our team will contact you within 24 hours to schedule a detailed consultation. We will discuss your goals, finalize the scope, and draft a formal agreement."
+    },
+    {
+        question: "Is UI/UX Design included in development packages?",
+        answer: "No, our development packages assume you will provide the design (Figma/XD files). If you need us to design the UI/UX from scratch, it is charged as a separate service."
+    },
+    {
+        question: "Are costs for Themes, Hosting, or Domains included?",
+        answer: "No. Third-party costs such as Domain names, Server Hosting, Premium WordPress/Shopify Themes, and Play Store Console fees are billed directly to you (the client)."
     },
     {
         question: "Is the remaining amount paid all at once?",
@@ -721,50 +1071,60 @@ const LegalPage = ({ type, onBack }) => {
                 </div>
                 
                 <div className="space-y-8 text-gray-300 leading-relaxed">
-                    {isTerms ? (
-                        <>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">1. Services</h3>
-                                <p>Creatix agrees to provide the services described in the specific package or custom agreement selected by the Client. Any additional work outside the scope will be charged separately.</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">2. Payments</h3>
-                                <p>A non-refundable booking fee of ₹99 is required to schedule a consultation. Subsequent payments will be structured as per the project agreement (typically 50% upfront and 50% upon completion).</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">3. Timelines</h3>
-                                <p>Project timelines are estimates. Creatix will make every effort to meet deadlines, provided the Client furnishes necessary information and approvals on time.</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">4. Intellectual Property</h3>
-                                <p>Upon full payment, the Client will own the rights to the final deliverables. Creatix retains the right to display the work in its portfolio unless a Non-Disclosure Agreement (NDA) is signed.</p>
-                            </section>
-                        </>
-                    ) : (
-                        <>
-                            <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-xl mb-6">
-                                <p className="font-bold text-white flex items-center gap-2"><Info size={18} /> Essential Note</p>
-                                <p className="mt-1 text-sm text-purple-200">The initial ₹99 booking fee is strictly non-refundable as it covers the administrative cost of scheduling and preliminary analysis.</p>
-                            </div>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">1. Booking Fee</h3>
-                                <p>The ₹99 booking fee paid online is a consultation charge and is non-refundable under any circumstances, including cancellations or rescheduling.</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">2. Project Cancellations</h3>
-                                <p>If a project is cancelled by the Client after the agreement is signed but before work begins, any advance payment (excluding the booking fee) may be refunded at Creatix's discretion, typically minus a 10% processing fee.</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">3. Work in Progress</h3>
-                                <p>Once design or development work has commenced, no refunds will be issued for the initial deposit (usually 50%). Refunds for the final balance are only applicable if Creatix fails to deliver the agreed scope.</p>
-                            </section>
-                            <section>
-                                <h3 className="text-xl font-bold text-white mb-3">4. Satisfaction Guarantee</h3>
-                                <p>We offer revision rounds as specified in your package to ensure satisfaction. Refunds are not offered based on personal taste or style preferences once designs are approved.</p>
-                            </section>
-                        </>
-                    )}
-                </div>
+    {isTerms ? (
+        <>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">1. Scope of Services</h3>
+                <p>Creatix agrees to provide the services described in the specific package. <strong>Note:</strong> Web & App development packages <u>do not</u> include UI/UX Design unless explicitly purchased as an add-on. Development will proceed based on designs provided by the Client or standard templates.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">2. Third-Party Costs & Exclusions</h3>
+                <p>Package prices are for service/labor only. The Client is responsible for all third-party expenses, including but not limited to:</p>
+                <ul className="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                    <li>Domain Names & Web Hosting/Server Fees</li>
+                    <li>Premium WordPress/Shopify Themes & Plugin Licenses</li>
+                    <li>Google Play Console ($25) & Apple Developer Program ($99) Fees</li>
+                    <li>Paid API Usage (e.g., Advanced Google Maps, SMS Gateways)</li>
+                </ul>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">3. Payments</h3>
+                <p>A non-refundable booking fee of ₹99 is required to schedule a consultation. Subsequent payments are typically structured as 50% advance to begin work and 50% upon project completion before final credentials handover.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">4. Timelines & Delays</h3>
+                <p>Project timelines are estimates. Creatix is not responsible for delays caused by the Client's failure to provide content, approvals, or third-party account access (e.g., OTPs, Hosting credentials) on time.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">5. Intellectual Property</h3>
+                <p>Upon full payment, the Client owns the rights to the final code and design assets. Creatix retains the right to display the work in its portfolio unless a Non-Disclosure Agreement (NDA) is signed.</p>
+            </section>
+        </>
+    ) : (
+        <>
+            <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-xl mb-6">
+                <p className="font-bold text-white flex items-center gap-2"><Info size={18} /> Essential Note</p>
+                <p className="mt-1 text-sm text-purple-200">The initial ₹99 booking fee is strictly non-refundable as it covers the administrative cost of scheduling and preliminary analysis.</p>
+            </div>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">1. Third-Party Purchases</h3>
+                <p>Any funds collected for the purchase of Domains, Hosting, Theme Licenses, or App Store Accounts are <strong>100% non-refundable</strong> once the purchase has been executed on your behalf, as these are external vendors.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">2. Project Cancellations</h3>
+                <p>If a project is cancelled by the Client after the agreement is signed but before design/dev work begins, the 50% advance may be refunded minus a 10% processing fee. The ₹99 booking fee remains non-refundable.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">3. Work in Progress</h3>
+                <p>Once the project has moved to the "Design" or "Development" phase, the initial 50% deposit becomes non-refundable to cover the time and effort of our team/students.</p>
+            </section>
+            <section>
+                <h3 className="text-xl font-bold text-white mb-3">4. Satisfaction Guarantee</h3>
+                <p>We provide revisions as per your package limits. Refunds are not issued based on "change of mind" regarding style preferences once the initial design concepts have been approved by the Client.</p>
+            </section>
+        </>
+    )}
+</div>
             </div>
         </div>
     );
