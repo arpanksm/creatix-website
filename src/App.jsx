@@ -779,7 +779,8 @@ const ThreeDBackground = () => {
         canvas.height = height;
 
         let points = [];
-        const numPoints = 300;
+        // Reduced points for mobile performance
+        const numPoints = width < 768 ? 100 : 300; 
         const sphereRadius = 400;
 
         for(let i=0; i<numPoints; i++) {
@@ -1287,7 +1288,7 @@ export default function App() {
 
                 {/* Mobile Menu Overlay */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden absolute top-full left-0 w-full h-screen bg-black/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl overflow-y-auto">
+                    <div className="md:hidden fixed top-[75px] bottom-0 left-0 w-full bg-black/95 backdrop-blur-xl border-t border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl overflow-y-auto z-40">
                         <button onClick={() => { setView('home'); setIsMobileMenuOpen(false); }} className="text-lg text-gray-300 hover:text-white transition text-left">Home</button>
                         <button onClick={() => { setView('team'); setIsMobileMenuOpen(false); }} className="text-lg text-gray-300 hover:text-white transition text-left">Our Team</button>
                         <button onClick={() => { 
@@ -1899,7 +1900,7 @@ export default function App() {
             href="https://wa.me/911234567890" // Replace with your actual WhatsApp number
             target="_blank" 
             rel="noopener noreferrer"
-            className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full flex items-center justify-center shadow-lg shadow-green-900/50 hover:scale-110 transition duration-300 animate-bounce-slow"
+            className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full flex items-center justify-center shadow-lg shadow-green-900/50 hover:scale-110 transition duration-300 animate-bounce-slow"
             aria-label="Chat with us on WhatsApp"
         >
             <i className="fab fa-whatsapp text-3xl text-white" aria-hidden="true"></i>
