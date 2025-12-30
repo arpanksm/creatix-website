@@ -1287,7 +1287,7 @@ export default function App() {
 
                 {/* Mobile Menu Overlay */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl">
+                    <div className="md:hidden absolute top-full left-0 w-full h-screen bg-black/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl overflow-y-auto">
                         <button onClick={() => { setView('home'); setIsMobileMenuOpen(false); }} className="text-lg text-gray-300 hover:text-white transition text-left">Home</button>
                         <button onClick={() => { setView('team'); setIsMobileMenuOpen(false); }} className="text-lg text-gray-300 hover:text-white transition text-left">Our Team</button>
                         <button onClick={() => { 
@@ -1323,7 +1323,7 @@ export default function App() {
                 </RevealOnScroll>
                 
                 <RevealOnScroll className="delay-100">
-                    <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight font-display tracking-tight">
+                    <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-8 leading-tight font-display tracking-tight">
                         FUTURE OF <br/>
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#2563eb] to-[#00ffff] animate-gradient-x">
                             DIGITAL CRAFT
@@ -1332,7 +1332,7 @@ export default function App() {
                 </RevealOnScroll>
 
                 <RevealOnScroll className="delay-200">
-                    <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 font-light">
+                    <p className="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 font-light">
                         Creatix is an award-winning agency blending <span className="text-white font-medium">art</span>, <span className="text-white font-medium">technology</span>, and <span className="text-white font-medium">strategy</span> to build brands that defy expectations.
                     </p>
                 </RevealOnScroll>
@@ -1359,8 +1359,8 @@ export default function App() {
             <div className="container mx-auto px-6">
                  <div className="text-center mb-20">
                     <RevealOnScroll>
-                        <h1 className="text-5xl md:text-7xl font-bold font-display mb-6">Meet The <span className="text-purple-500">Minds</span></h1>
-                        <p className="text-xl text-gray-400 max-w-2xl mx-auto">The visionaries, creators, and strategists behind Creatix's digital revolution.</p>
+                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold font-display mb-6">Meet The <span className="text-purple-500">Minds</span></h1>
+                        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">The visionaries, creators, and strategists behind Creatix's digital revolution.</p>
                     </RevealOnScroll>
                 </div>
 
@@ -1403,7 +1403,7 @@ export default function App() {
                     {stats.map((stat, idx) => (
                         <RevealOnScroll key={idx} className={`delay-${idx * 100}`}>
                             <div className="text-center group hover:transform hover:scale-105 transition duration-300">
-                                <h3 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 mb-2 font-display">
+                                <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 mb-2 font-display">
                                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                                 </h3>
                                 <p className="text-purple-400 font-medium uppercase tracking-wider text-sm">{stat.label}</p>
@@ -1416,13 +1416,13 @@ export default function App() {
     );
 
     const ServicesSection = () => (
-        <section id="services" className="py-32 relative">
+        <section id="services" className="py-20 md:py-32 relative">
             <div className="absolute top-1/2 left-0 w-full h-96 bg-purple-900/10 blur-[100px] -z-10" aria-hidden="true"></div>
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20">
                     <div className="max-w-2xl">
-                        <h2 className="text-4xl md:text-6xl font-bold font-display mb-6">Our Expertise</h2>
-                        <p className="text-xl text-gray-400">Comprehensive digital solutions engineered for modern businesses.</p>
+                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold font-display mb-6">Our Expertise</h2>
+                        <p className="text-lg sm:text-xl text-gray-400">Comprehensive digital solutions engineered for modern businesses.</p>
                     </div>
                 </div>
 
@@ -1460,10 +1460,10 @@ export default function App() {
     );
 
     const RoadmapSection = () => (
-        <section id="process" className="py-32 relative bg-black/40">
+        <section id="process" className="py-20 md:py-32 relative bg-black/40">
             <div className="container mx-auto px-6">
                 <div className="text-center mb-24">
-                    <h2 className="text-4xl md:text-6xl font-bold font-display mb-6">The Process</h2>
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold font-display mb-6">The Process</h2>
                     <p className="text-gray-400">From concept to launch, we follow a rigorous path to perfection.</p>
                 </div>
                 
@@ -1538,7 +1538,7 @@ export default function App() {
     };
 
     const Testimonials = () => (
-        <section className="py-32 overflow-hidden">
+        <section className="py-20 md:py-32 overflow-hidden">
              <div className="container mx-auto px-6">
                 <h2 className="text-3xl md:text-5xl font-bold font-display text-center mb-16">Client Stories</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1661,7 +1661,7 @@ export default function App() {
                                 <div className={`inline-block p-4 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 text-white mb-6 shadow-lg shadow-purple-500/30`}>
                                     <IconComponent name={selectedService.icon} size={32} />
                                 </div>
-                                <h1 className="text-5xl md:text-7xl font-bold mb-6 font-display">{selectedService.title}</h1>
+                                <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 font-display">{selectedService.title}</h1>
                                 <p className="text-2xl text-gray-300 max-w-3xl font-light">{selectedService.longDesc}</p>
                             </div>
                             <div className="glass-panel p-8 rounded-2xl text-center min-w-[240px] border border-purple-500/20">
