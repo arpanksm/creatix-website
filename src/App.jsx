@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Globe, Search, Smartphone, Share2, Film, PenTool, 
@@ -11,6 +10,25 @@ import {
 
 const THEME_COLOR = "purple"; 
 const PRIMARY_HEX = "#7c3aed"; 
+
+// --- SEO Helper Component ---
+const MetaController = ({ title, description }) => {
+  useEffect(() => {
+    // Update Title
+    document.title = title ? `${title} | Creatix Digital Agency` : "Creatix | Future of Digital Craft";
+    
+    // Update Meta Description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = "description";
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = description || "Creatix is an award-winning digital agency specializing in Web Development, App Development, SEO, and Branding. We build brands that defy expectations.";
+  }, [title, description]);
+
+  return null;
+};
 
 // --- Data ---
 const servicesData = [
@@ -402,7 +420,7 @@ const servicesData = [
                             "Crisis Management Support", 
                             "Tapes and Raw photos provided by Client",
                             "Note: Ad Budget Billed to Client",
-                            
+                             
                         ] 
                     }
                 ]
@@ -743,9 +761,9 @@ const iconMap = {
     Plus, Minus, HelpCircle, Menu, X, FileText, Instagram
 };
 
-const IconComponent = ({ name, size = 24, className }) => {
+const IconComponent = ({ name, size = 24, className, ariaHidden = true }) => {
     const LucideIcon = iconMap[name];
-    return LucideIcon ? <LucideIcon size={size} className={className} /> : null;
+    return LucideIcon ? <LucideIcon size={size} className={className} aria-hidden={ariaHidden} /> : null;
 };
 
 // --- 3D Background Component (Vanilla JS Canvas) ---
@@ -852,7 +870,7 @@ const ThreeDBackground = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none " />;
+    return <canvas ref={canvasRef} className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none " aria-hidden="true" />;
 };
 
 // --- Helper for scroll animations ---
@@ -921,6 +939,12 @@ const PaymentModal = ({ bookingInfo, onClose, onComplete }) => {
     const [step, setStep] = useState(1); // 1: User Info, 2: Payment, 3: Processing, 4: Success
     const [details, setDetails] = useState({ name: '', email: '', phone: '', card: '', expiry: '', cvc: '' });
 
+    // Focus Trap & Aria Modal management
+    const modalRef = useRef(null);
+    useEffect(() => {
+        if(modalRef.current) modalRef.current.focus();
+    }, [step]);
+
     const handleInfoSubmit = (e) => {
         e.preventDefault();
         setStep(2);
@@ -944,43 +968,58 @@ const PaymentModal = ({ bookingInfo, onClose, onComplete }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-            <div className="bg-[#111] border border-white/10 p-8 rounded-3xl w-full max-w-md relative shadow-2xl shadow-purple-900/50">
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-white"><X size={20}/></button>
+        <div 
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
+            <div 
+                ref={modalRef}
+                tabIndex="-1"
+                className="bg-[#111] border border-white/10 p-8 rounded-3xl w-full max-w-md relative shadow-2xl shadow-purple-900/50 outline-none"
+            >
+                <button 
+                    onClick={onClose} 
+                    className="absolute top-4 right-4 text-gray-500 hover:text-white p-1 rounded-full hover:bg-white/10 transition"
+                    aria-label="Close Modal"
+                >
+                    <X size={20} aria-hidden="true"/>
+                </button>
                 
                 {step === 1 && (
                     <form onSubmit={handleInfoSubmit} className="animate-fade-in">
-                        <h3 className="text-2xl font-bold font-display mb-2">Your Details</h3>
+                        <h3 id="modal-title" className="text-2xl font-bold font-display mb-2">Your Details</h3>
                         <p className="text-gray-400 mb-6 text-sm">Please provide your contact information to proceed with booking.</p>
                         
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
-                                <input required placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
+                                <label htmlFor="name" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Full Name</label>
+                                <input id="name" required placeholder="Your Name" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
                                     value={details.name} onChange={e => setDetails({...details, name: e.target.value})} />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
-                                <input required type="email" placeholder="mail@example.com" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
+                                <label htmlFor="email" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                                <input id="email" required type="email" placeholder="mail@example.com" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
                                     value={details.email} onChange={e => setDetails({...details, email: e.target.value})} />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Phone Number</label>
-                                <input required type="tel" placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
+                                <label htmlFor="phone" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Phone Number</label>
+                                <input id="phone" required type="tel" placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
                                     value={details.phone} onChange={e => setDetails({...details, phone: e.target.value})} />
                             </div>
                         </div>
 
                         <button type="submit" className="w-full mt-8 py-4 bg-white text-black hover:bg-gray-200 rounded-xl font-bold text-lg transition flex items-center justify-center gap-2">
-                            Proceed to Payment <ArrowRight size={16} />
+                            Proceed to Payment <ArrowRight size={16} aria-hidden="true" />
                         </button>
                     </form>
                 )}
 
                 {step === 2 && (
                     <form onSubmit={handlePay} className="animate-fade-in">
-                        <button onClick={() => setStep(1)} type="button" className="text-sm text-gray-400 hover:text-white mb-4 flex items-center gap-1 transition"><ArrowLeft size={14}/> Back</button>
-                        <h3 className="text-2xl font-bold font-display mb-1">Secure Checkout</h3>
+                        <button onClick={() => setStep(1)} type="button" className="text-sm text-gray-400 hover:text-white mb-4 flex items-center gap-1 transition" aria-label="Go back to previous step"><ArrowLeft size={14} aria-hidden="true"/> Back</button>
+                        <h3 id="modal-title" className="text-2xl font-bold font-display mb-1">Secure Checkout</h3>
                         <div className="mb-6 text-sm text-gray-400">
                             Booking: <span className="text-white">{bookingInfo.serviceName}</span>
                             {bookingInfo.packageName && <span className="text-purple-400"> • {bookingInfo.packageName}</span>}
@@ -993,7 +1032,7 @@ const PaymentModal = ({ bookingInfo, onClose, onComplete }) => {
                             </div>
                             <div className="mt-3 pt-3 border-t border-purple-500/20 text-xs text-purple-200">
                                 <div className="flex gap-2 items-start">
-                                    <Info size={14} className="mt-0.5 flex-shrink-0" />
+                                    <Info size={14} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
                                     <div>
                                         <p className="mb-1 font-bold">Non-refundable booking fee.</p>
                                         <p className="opacity-80">The remaining amount (approx. ₹{bookingInfo.originalPrice}) will be payable after a mutual agreement is signed.</p>
@@ -1004,32 +1043,41 @@ const PaymentModal = ({ bookingInfo, onClose, onComplete }) => {
 
                         <div className="space-y-4">
                             <div className="relative">
-                                <CreditCard className="absolute top-3.5 left-3 text-gray-500" size={18}/>
-                                <input required placeholder="Card Number" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 pl-10 text-white focus:border-purple-500 outline-none transition" 
+                                <label htmlFor="card-number" className="sr-only">Card Number</label>
+                                <CreditCard className="absolute top-3.5 left-3 text-gray-500" size={18} aria-hidden="true"/>
+                                <input id="card-number" required placeholder="Card Number" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 pl-10 text-white focus:border-purple-500 outline-none transition" 
                                     maxLength="19" value={details.card} onChange={e => setDetails({...details, card: e.target.value})} />
                             </div>
                             
                             <div className="flex gap-4">
-                                <input required placeholder="MM/YY" className="w-1/2 bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
-                                    maxLength="5" value={details.expiry} onChange={e => setDetails({...details, expiry: e.target.value})} />
-                                <input required placeholder="CVC" className="w-1/2 bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
-                                    maxLength="3" type="password" value={details.cvc} onChange={e => setDetails({...details, cvc: e.target.value})} />
+                                <div className="w-1/2">
+                                     <label htmlFor="card-expiry" className="sr-only">Expiry Date</label>
+                                    <input id="card-expiry" required placeholder="MM/YY" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
+                                        maxLength="5" value={details.expiry} onChange={e => setDetails({...details, expiry: e.target.value})} />
+                                </div>
+                                <div className="w-1/2">
+                                    <label htmlFor="card-cvc" className="sr-only">CVC</label>
+                                    <input id="card-cvc" required placeholder="CVC" className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:border-purple-500 outline-none transition" 
+                                        maxLength="3" type="password" value={details.cvc} onChange={e => setDetails({...details, cvc: e.target.value})} />
+                                </div>
                             </div>
                         </div>
 
                         <button type="submit" className="w-full mt-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 transition flex items-center justify-center gap-2">
-                            <Lock size={16} /> Pay ₹99 & Book
+                            <Lock size={16} aria-hidden="true" /> Pay ₹99 & Book
                         </button>
                         
                         <div className="mt-4 flex justify-center gap-4 text-gray-500 opacity-50">
-                            <div className="flex items-center gap-1 text-xs"><ShieldCheck size={12}/> SSL Encrypted</div>
+                            <div className="flex items-center gap-1 text-xs"><ShieldCheck size={12} aria-hidden="true"/> SSL Encrypted</div>
                         </div>
                     </form>
                 )}
 
                 {step === 3 && (
                     <div className="text-center py-12 animate-fade-in">
-                        <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                        <div role="status" className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-6">
+                            <span className="sr-only">Loading...</span>
+                        </div>
                         <h4 className="text-xl font-bold mb-2">Securing Slot...</h4>
                         <p className="text-gray-400">Processing booking fee of ₹99.</p>
                     </div>
@@ -1038,7 +1086,7 @@ const PaymentModal = ({ bookingInfo, onClose, onComplete }) => {
                 {step === 4 && (
                     <div className="text-center py-8 animate-fade-in">
                         <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/30">
-                            <Check size={40} className="text-white" />
+                            <Check size={40} className="text-white" aria-hidden="true" />
                         </div>
                         <h4 className="text-2xl font-bold mb-2 text-white">Booking Confirmed!</h4>
                         <p className="text-gray-400">Our team will contact you shortly.</p>
@@ -1054,18 +1102,18 @@ const LegalPage = ({ type, onBack }) => {
     const isTerms = type === 'terms';
     
     return (
-        <div className="min-h-screen pt-24 pb-12 container mx-auto px-6">
-            <button onClick={onBack} className="text-gray-400 hover:text-white mb-8 flex items-center gap-2 transition">
-                <ArrowLeft size={20} /> Back
+        <main className="min-h-screen pt-24 pb-12 container mx-auto px-6">
+            <button onClick={onBack} className="text-gray-400 hover:text-white mb-8 flex items-center gap-2 transition" aria-label="Go Back">
+                <ArrowLeft size={20} aria-hidden="true" /> Back
             </button>
             
-            <div className="glass-panel p-8 md:p-12 rounded-3xl border border-white/10 max-w-4xl mx-auto">
-                <div className="flex items-center gap-4 mb-8">
+            <article className="glass-panel p-8 md:p-12 rounded-3xl border border-white/10 max-w-4xl mx-auto">
+                <header className="flex items-center gap-4 mb-8">
                     <div className="w-12 h-12 rounded-full bg-purple-600/20 flex items-center justify-center text-purple-400">
-                        <FileText size={24} />
+                        <FileText size={24} aria-hidden="true" />
                     </div>
                     <h1 className="text-3xl md:text-4xl font-bold font-display">{isTerms ? 'Terms of Service' : 'Refund Policy'}</h1>
-                </div>
+                </header>
                 
                 <div className="space-y-8 text-gray-300 leading-relaxed">
     {isTerms ? (
@@ -1100,7 +1148,7 @@ const LegalPage = ({ type, onBack }) => {
     ) : (
         <>
             <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-xl mb-6">
-                <p className="font-bold text-white flex items-center gap-2"><Info size={18} /> Essential Note</p>
+                <p className="font-bold text-white flex items-center gap-2"><Info size={18} aria-hidden="true" /> Essential Note</p>
                 <p className="mt-1 text-sm text-purple-200">The initial ₹99 booking fee is strictly non-refundable as it covers the administrative cost of scheduling and preliminary analysis.</p>
             </div>
             <section>
@@ -1122,8 +1170,8 @@ const LegalPage = ({ type, onBack }) => {
         </>
     )}
 </div>
-            </div>
-        </div>
+            </article>
+        </main>
     );
 };
 
@@ -1189,15 +1237,16 @@ export default function App() {
         const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
         return (
-            <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+            <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5 transition-all duration-300" aria-label="Main Navigation">
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <div 
-                        className="flex items-center gap-3 cursor-pointer group" 
+                    <button 
+                        className="flex items-center gap-3 cursor-pointer group bg-transparent border-none p-0" 
                         onClick={() => { setView('home'); setIsMobileMenuOpen(false); }}
+                        aria-label="Creatix Home"
                     >
                         <img 
                             src="creatix_logo.png" 
-                            alt="Creatix Logo" 
+                            alt="Creatix Digital Agency Logo" 
                             className="w-10 h-auto object-contain transition-transform group-hover:scale-110"
                             onError={(e) => {
                                 e.target.onerror = null;
@@ -1205,9 +1254,9 @@ export default function App() {
                                 e.target.nextSibling.style.display = 'flex';
                             }} 
                         />
-                        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg hidden items-center justify-center font-bold text-xl shadow-lg shadow-purple-500/30">C</div>
+                        <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg hidden items-center justify-center font-bold text-xl shadow-lg shadow-purple-500/30" aria-hidden="true">C</div>
                         <span className="text-2xl font-bold tracking-tight font-display tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">CREATIX</span>
-                    </div>
+                    </button>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex gap-8 items-center text-sm font-medium">
@@ -1219,7 +1268,7 @@ export default function App() {
                                 setView('home');
                                 setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({behavior: 'smooth'}), 100);
                             }}
-                            className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-full font-bold transition shadow-lg shadow-purple-900/50 hover:shadow-purple-700/50 transform hover:-translate-y-0.5"
+                            className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-full font-bold transition shadow-lg shadow-purple-900/50 hover:shadow-purple-700/50 transform hover:-translate-y-0.5 text-white"
                         >
                             Get Started
                         </button>
@@ -1227,10 +1276,12 @@ export default function App() {
 
                     {/* Mobile Menu Button */}
                     <button 
-                        className="md:hidden text-white"
+                        className="md:hidden text-white p-2"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
+                        aria-expanded={isMobileMenuOpen}
                     >
-                        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                        {isMobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
                     </button>
                 </div>
 
@@ -1250,7 +1301,7 @@ export default function App() {
                                 setIsMobileMenuOpen(false);
                                 setTimeout(() => document.getElementById('contact-form')?.scrollIntoView({behavior: 'smooth'}), 100);
                             }}
-                            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-bold text-center"
+                            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-bold text-center text-white"
                         >
                             Get Started
                         </button>
@@ -1262,11 +1313,11 @@ export default function App() {
 
     // Reuse Hero, TeamPage, StatsSection, ServicesSection, RoadmapSection, Testimonials components (Standard)
     const Hero = () => (
-        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" aria-label="Hero Section">
             <div className="container mx-auto px-6 text-center z-10">
                 <RevealOnScroll>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-purple-500/30 text-purple-300 mb-8 animate-pulse-slow">
-                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true"></span>
                         Accepting New Projects
                     </div>
                 </RevealOnScroll>
@@ -1289,7 +1340,7 @@ export default function App() {
                 <RevealOnScroll className="delay-300">
                     <div className="flex flex-col md:flex-row gap-6 justify-center">
                         <button onClick={() => document.getElementById('services').scrollIntoView({behavior:'smooth'})} className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg hover:bg-gray-100 transition overflow-hidden">
-                            <span className="relative z-10 flex items-center gap-2">Explore Services <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition"/></span>
+                            <span className="relative z-10 flex items-center gap-2">Explore Services <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" aria-hidden="true"/></span>
                         </button>
                         <button onClick={() => document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})} className="px-8 py-4 glass-panel rounded-full font-bold text-lg hover:bg-white/10 transition border border-white/10 hover:border-white/30 backdrop-blur-md">
                             Get a Quote
@@ -1299,12 +1350,12 @@ export default function App() {
             </div>
             
             {/* Ambient Glow */}
-            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" aria-hidden="true"></div>
         </section>
     );
 
     const TeamPage = () => (
-        <div className="min-h-screen pt-24 pb-12">
+        <main className="min-h-screen pt-24 pb-12">
             <div className="container mx-auto px-6">
                  <div className="text-center mb-20">
                     <RevealOnScroll>
@@ -1318,7 +1369,7 @@ export default function App() {
                         <RevealOnScroll key={idx} className={`delay-${idx * 100}`}>
                             <div className="group relative glass-panel rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition duration-500">
                                 <div className="aspect-[4/5] overflow-hidden">
-                                    <img src={member.img} alt={member.name} className="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
+                                    <img src={member.img} alt={`Portrait of ${member.name}, ${member.role}`} className="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale" />
                                 </div>
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
                                     <h3 className="text-2xl font-bold font-display mb-1">{member.name}</h3>
@@ -1326,10 +1377,14 @@ export default function App() {
                                     
                                     <div className="flex gap-4 mt-4 opacity-0 group-hover:opacity-100 transition duration-300 transform translate-y-4 group-hover:translate-y-0">
                                         {member.instagram && (
-                                            <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 hover:bg-white hover:text-black transition"><Instagram size={16} /></a>
+                                            <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 hover:bg-white hover:text-black transition" aria-label={`${member.name}'s Instagram`}>
+                                                <Instagram size={16} aria-hidden="true" />
+                                            </a>
                                         )}
                                         {member.linkedin && (
-                                            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 hover:bg-white hover:text-black transition"><Linkedin size={16} /></a>
+                                            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white/10 hover:bg-white hover:text-black transition" aria-label={`${member.name}'s LinkedIn`}>
+                                                <Linkedin size={16} aria-hidden="true" />
+                                            </a>
                                         )}
                                     </div>
                                 </div>
@@ -1338,11 +1393,11 @@ export default function App() {
                     ))}
                 </div>
             </div>
-        </div>
+        </main>
     );
 
     const StatsSection = () => (
-        <section className="py-20 border-y border-white/5 bg-black/20 backdrop-blur-sm">
+        <section className="py-20 border-y border-white/5 bg-black/20 backdrop-blur-sm" aria-label="Company Statistics">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((stat, idx) => (
@@ -1362,7 +1417,7 @@ export default function App() {
 
     const ServicesSection = () => (
         <section id="services" className="py-32 relative">
-            <div className="absolute top-1/2 left-0 w-full h-96 bg-purple-900/10 blur-[100px] -z-10"></div>
+            <div className="absolute top-1/2 left-0 w-full h-96 bg-purple-900/10 blur-[100px] -z-10" aria-hidden="true"></div>
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20">
                     <div className="max-w-2xl">
@@ -1374,9 +1429,12 @@ export default function App() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {servicesData.map((service, idx) => (
                         <RevealOnScroll key={service.id} className={`delay-${idx * 100}`}>
-                            <div 
+                            <article 
                                 onClick={() => handleServiceClick(service)}
-                                className="group relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/50 transition-all duration-500 cursor-pointer overflow-hidden hover:-translate-y-2"
+                                onKeyDown={(e) => { if(e.key === 'Enter') handleServiceClick(service) }}
+                                role="button"
+                                tabIndex="0"
+                                className="group relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/50 transition-all duration-500 cursor-pointer overflow-hidden hover:-translate-y-2 outline-none focus:ring-2 focus:ring-purple-500"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 
@@ -1389,11 +1447,11 @@ export default function App() {
                                     <div className="flex items-center justify-between border-t border-white/5 pt-6">
                                         <span className="text-xs font-bold uppercase tracking-wider text-gray-500">{service.rate.replace('Starting at ', '')}</span>
                                         <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-600 transition duration-300">
-                                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white" />
+                                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white" aria-hidden="true" />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </RevealOnScroll>
                     ))}
                 </div>
@@ -1410,7 +1468,7 @@ export default function App() {
                 </div>
                 
                 <div className="relative max-w-4xl mx-auto">
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-purple-500 to-transparent"></div>
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-purple-500 to-transparent" aria-hidden="true"></div>
                     
                     <div className="space-y-12 md:space-y-24">
                         {roadmapSteps.map((step, idx) => (
@@ -1430,7 +1488,7 @@ export default function App() {
                                     </div>
                                     
                                     <div className="flex-1 hidden md:block">
-                                        <div className="text-white-600 text-8xl font-black opacity-60 font-display select-none text-center">
+                                        <div className="text-white-600 text-8xl font-black opacity-60 font-display select-none text-center" aria-hidden="true">
                                             0{idx + 1}
                                         </div>
                                     </div>
@@ -1460,11 +1518,13 @@ export default function App() {
                                 <button 
                                     onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                                     className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition"
+                                    aria-expanded={openIndex === idx}
+                                    aria-controls={`faq-answer-${idx}`}
                                 >
                                     <span className="font-bold text-lg pr-8">{faq.question}</span>
-                                    {openIndex === idx ? <Minus className="text-purple-400 flex-shrink-0" /> : <Plus className="text-gray-400 flex-shrink-0" />}
+                                    {openIndex === idx ? <Minus className="text-purple-400 flex-shrink-0" aria-hidden="true"/> : <Plus className="text-gray-400 flex-shrink-0" aria-hidden="true"/>}
                                 </button>
-                                <div className={`overflow-hidden transition-all duration-300 ${openIndex === idx ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                <div id={`faq-answer-${idx}`} className={`overflow-hidden transition-all duration-300 ${openIndex === idx ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
                                     <p className="p-6 pt-0 text-gray-400 leading-relaxed">
                                         {faq.answer}
                                     </p>
@@ -1484,10 +1544,10 @@ export default function App() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {testimonials.map((t, idx) => (
                         <div key={idx} className="glass-panel p-8 rounded-2xl relative border border-white/5 hover:bg-white/5 transition duration-300">
-                             <div className="absolute -top-4 left-8 text-6xl text-purple-600 font-serif opacity-50">"</div>
+                             <div className="absolute -top-4 left-8 text-6xl text-purple-600 font-serif opacity-50" aria-hidden="true">"</div>
                              <p className="text-gray-300 mb-6 italic relative z-10">{t.text}</p>
                              <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center font-bold text-lg">
+                                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center font-bold text-lg" aria-hidden="true">
                                     {t.name[0]}
                                 </div>
                                 <div>
@@ -1495,8 +1555,8 @@ export default function App() {
                                     <p className="text-xs text-purple-400 uppercase tracking-wider">{t.role}</p>
                                 </div>
                              </div>
-                             <div className="flex gap-1 mt-4 text-yellow-500">
-                                 {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                             <div className="flex gap-1 mt-4 text-yellow-500" aria-label={`Rated ${t.rating} out of 5 stars`}>
+                                 {[...Array(t.rating)].map((_, i) => <Star key={i} size={14} fill="currentColor" aria-hidden="true"/>)}
                              </div>
                         </div>
                     ))}
@@ -1525,7 +1585,7 @@ export default function App() {
 
         return (
             <section id="contact-form" className="py-24 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-black to-purple-900/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black to-purple-900/20" aria-hidden="true"></div>
                 <div className="container mx-auto px-6 max-w-5xl relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
                         <div className="lg:col-span-2 bg-gradient-to-br from-purple-900/50 to-blue-900/50 p-12 flex flex-col justify-between">
@@ -1534,15 +1594,15 @@ export default function App() {
                                 <p className="text-gray-300 mb-8">Ready to start your next project? We are here to help you grow.</p>
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-4 text-gray-300">
-                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Map size={20} /></div>
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Map size={20} aria-hidden="true"/></div>
                                         <span>123 Innovation Dr, Tech City</span>
                                     </div>
                                     <div className="flex items-center gap-4 text-gray-300">
-                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Smartphone size={20} /></div>
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Smartphone size={20} aria-hidden="true"/></div>
                                         <span>+1 (555) 000-0000</span>
                                     </div>
                                     <div className="flex items-center gap-4 text-gray-300">
-                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Share2 size={20} /></div>
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Share2 size={20} aria-hidden="true"/></div>
                                         <span>hello@creatix.com</span>
                                     </div>
                                 </div>
@@ -1552,31 +1612,31 @@ export default function App() {
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="group">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name</label>
-                                        <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
+                                        <label htmlFor="contact-name" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name</label>
+                                        <input id="contact-name" required type="text" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white" 
                                             value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} />
                                     </div>
                                     <div className="group">
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Email</label>
-                                        <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
+                                        <label htmlFor="contact-email" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Email</label>
+                                        <input id="contact-email" required type="email" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white" 
                                             value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} />
                                     </div>
                                 </div>
                                 <div className="group">
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Service</label>
-                                    <select className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
+                                    <label htmlFor="contact-service" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Service</label>
+                                    <select id="contact-service" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
                                         value={formState.service} onChange={e => setFormState({...formState, service: e.target.value})}>
                                         <option className="bg-gray-900">General Inquiry</option>
                                         {servicesData.map(s => <option key={s.id} className="bg-gray-900" value={s.title}>{s.title}</option>)}
                                     </select>
                                 </div>
                                 <div className="group">
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Details</label>
-                                    <textarea required rows="4" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
+                                    <label htmlFor="contact-message" className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Details</label>
+                                    <textarea id="contact-message" required rows="4" className="w-full bg-white/5 border border-white/10 rounded-lg p-4 focus:border-purple-500 outline-none text-white"
                                         placeholder="Tell us about your project timeline and goals..." value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}></textarea>
                                 </div>
-                                <button type="submit" className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 transition flex items-center justify-center gap-2">
-                                    Send Inquiry <Rocket size={20} />
+                                <button type="submit" className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 transition flex items-center justify-center gap-2 text-white">
+                                    Send Inquiry <Rocket size={20} aria-hidden="true"/>
                                 </button>
                             </form>
                         </div>
@@ -1590,11 +1650,11 @@ export default function App() {
         const [activeTab, setActiveTab] = useState(0);
 
         return (
-            <div className="pt-24 min-h-screen animate-fade-in">
+            <main className="pt-24 min-h-screen animate-fade-in">
                 <div className={`bg-gradient-to-b from-purple-900/20 to-transparent py-20 border-b border-white/5`}>
                     <div className="container mx-auto px-6">
-                            <button onClick={() => setView('home')} className="flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition group">
-                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-600 transition"><ArrowLeft className="w-4 h-4" /></div> Back to Home
+                            <button onClick={() => setView('home')} className="flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition group" aria-label="Go Back Home">
+                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-600 transition"><ArrowLeft className="w-4 h-4" aria-hidden="true"/></div> Back to Home
                         </button>
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                             <div>
@@ -1619,10 +1679,12 @@ export default function App() {
                             <h3 className="text-3xl font-bold mb-8 font-display text-center">Select Your Package</h3>
                             
                             {/* Tab Navigation */}
-                            <div className="flex flex-wrap justify-center gap-4 mb-12">
+                            <div className="flex flex-wrap justify-center gap-4 mb-12" role="tablist">
                                 {selectedService.subCategories.map((cat, idx) => (
                                     <button 
                                         key={cat.id}
+                                        role="tab"
+                                        aria-selected={activeTab === idx}
                                         onClick={() => setActiveTab(idx)}
                                         className={`px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center gap-2 ${activeTab === idx ? 'bg-white text-black shadow-lg shadow-white/20 scale-105' : 'glass-panel text-gray-400 hover:text-white'}`}
                                     >
@@ -1647,7 +1709,7 @@ export default function App() {
                                         <ul className="space-y-4 mb-8">
                                             {plan.features.map((feature, fIdx) => (
                                                 <li key={fIdx} className="flex items-start gap-3 text-sm text-gray-300">
-                                                    <Check className="text-purple-400 w-5 h-5 flex-shrink-0" />
+                                                    <Check className="text-purple-400 w-5 h-5 flex-shrink-0" aria-hidden="true"/>
                                                     <span>{feature}</span>
                                                 </li>
                                             ))}
@@ -1656,7 +1718,7 @@ export default function App() {
                                             onClick={() => handlePaymentStart(`${selectedService.title} - ${selectedService.subCategories[activeTab].name}`, plan.name, plan.price)}
                                             className={`w-full py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 ${idx === 1 ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-lg hover:shadow-purple-500/30' : 'bg-white text-black hover:bg-gray-200'}`}
                                         >
-                                            Book Slot (₹99) <ArrowRight size={16} />
+                                            Book Slot (₹99) <ArrowRight size={16} aria-hidden="true"/>
                                         </button>
                                     </div>
                                 ))}
@@ -1672,7 +1734,7 @@ export default function App() {
                                         {selectedService.features.map((feature, idx) => (
                                             <div key={idx} className="flex items-center gap-4 p-6 glass-panel rounded-xl border border-white/5 hover:border-purple-500/30 transition">
                                                 <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                                                    <Check className="text-green-400 w-4 h-4" />
+                                                    <Check className="text-green-400 w-4 h-4" aria-hidden="true"/>
                                                 </div>
                                                 <span className="text-lg font-medium">{feature}</span>
                                             </div>
@@ -1691,7 +1753,7 @@ export default function App() {
                                             onClick={() => handlePaymentStart(selectedService.title, 'Standard Booking', selectedService.priceValue.toString())}
                                             className="w-full py-4 bg-white text-black hover:bg-gray-200 rounded-xl font-bold transition mb-4 shadow-lg shadow-white/10 flex items-center justify-center gap-2"
                                         >
-                                            <CreditCard size={18} /> Book Slot (₹99)
+                                            <CreditCard size={18} aria-hidden="true"/> Book Slot (₹99)
                                         </button>
                                         <div className="text-xs text-center text-gray-500 mt-2">* + 18% GST Applicable on full amount</div>
                                         <button 
@@ -1701,7 +1763,7 @@ export default function App() {
                                             Request Custom Quote
                                         </button>
                                         <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500">
-                                            <Zap size={12} /> Fast secure processing
+                                            <Zap size={12} aria-hidden="true"/> Fast secure processing
                                         </div>
                                     </div>
                                 </div>
@@ -1715,7 +1777,7 @@ export default function App() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {selectedService.portfolio.map((img, idx) => (
                                 <div key={idx} className="aspect-[4/5] rounded-2xl overflow-hidden group relative cursor-pointer border border-white/10">
-                                    <img src={img} alt="Portfolio" className="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                                    <img src={img} alt={`${selectedService.title} Project ${idx + 1}`} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6">
                                         <span className="font-bold text-lg translate-y-4 group-hover:translate-y-0 transition duration-500">Project Name</span>
                                         <span className="text-purple-400 text-sm">View Case Study</span>
@@ -1737,12 +1799,12 @@ export default function App() {
                         onComplete={handlePaymentComplete} 
                     />
                 )}
-            </div>
+            </main>
         );
     };
 
     const AdminPanel = () => (
-        <div className="min-h-screen pt-24 pb-12 container mx-auto px-6">
+        <main className="min-h-screen pt-24 pb-12 container mx-auto px-6">
             <div className="flex justify-between items-center mb-12">
                 <h1 className="text-4xl font-bold font-display">Admin Dashboard</h1>
                 <button onClick={() => { setIsAdmin(false); setView('home'); }} className="text-red-400 hover:text-red-300 border border-red-500/30 px-6 py-2 rounded-full hover:bg-red-500/10 transition">Logout</button>
@@ -1782,7 +1844,7 @@ export default function App() {
                                         <td className="p-6">
                                             {booking.paymentStatus === 'Paid Booking Fee' ? (
                                                 <span className="flex items-center gap-2 text-green-400 text-sm font-bold bg-green-500/10 px-3 py-1 rounded-full w-fit">
-                                                    <CheckCircle size={14} /> Paid ₹{booking.amount}
+                                                    <CheckCircle size={14} aria-hidden="true"/> Paid ₹{booking.amount}
                                                 </span>
                                             ) : (
                                                 <span className="flex items-center gap-2 text-gray-400 text-sm bg-gray-800 px-3 py-1 rounded-full w-fit">
@@ -1802,7 +1864,7 @@ export default function App() {
                     </table>
                 </div>
             </div>
-        </div>
+        </main>
     );
 
     const LoginScreen = () => {
@@ -1811,10 +1873,12 @@ export default function App() {
             <div className="h-screen flex items-center justify-center bg-black fixed inset-0 z-50">
                  <ThreeDBackground />
                 <div className="glass-panel p-10 rounded-3xl w-full max-w-md text-center border border-white/10 shadow-2xl relative z-10">
-                    <div className="w-16 h-16 rounded-xl bg-purple-600 mx-auto mb-6 flex items-center justify-center text-2xl font-bold">C</div>
+                    <div className="w-16 h-16 rounded-xl bg-purple-600 mx-auto mb-6 flex items-center justify-center text-2xl font-bold" aria-hidden="true">C</div>
                     <h2 className="text-3xl font-bold mb-2 font-display">Admin Portal</h2>
                     <p className="text-gray-400 mb-8">Enter secure passkey.</p>
+                    <label htmlFor="admin-pass" className="sr-only">Password</label>
                     <input 
+                        id="admin-pass"
                         type="password" 
                         className="w-full bg-black/50 border border-white/10 rounded-xl p-4 mb-4 focus:border-purple-500 focus:outline-none text-center tracking-widest text-white transition focus:bg-black/80"
                         placeholder="••••••••"
@@ -1836,13 +1900,14 @@ export default function App() {
             target="_blank" 
             rel="noopener noreferrer"
             className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full flex items-center justify-center shadow-lg shadow-green-900/50 hover:scale-110 transition duration-300 animate-bounce-slow"
+            aria-label="Chat with us on WhatsApp"
         >
-            <i className="fab fa-whatsapp text-3xl text-white"></i>
+            <i className="fab fa-whatsapp text-3xl text-white" aria-hidden="true"></i>
         </a>
     );
 
     const Footer = () => (
-        <footer className="border-t border-white/5 py-16">
+        <footer className="border-t border-white/5 py-16" role="contentinfo">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                      <div className="flex items-center gap-3">
@@ -1850,13 +1915,14 @@ export default function App() {
                             src="creatix_logo.png" 
                             alt="Creatix Logo" 
                             className="w-8 h-auto opacity-80"
+                            onError={(e) => { e.target.style.display = 'none'; }}
                         />
                         <span className="text-2xl font-bold font-display tracking-wider">CREATIX</span>
                     </div>
                     <div className="flex gap-8">
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300"><Instagram size={18} /></a>
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300"><Twitter size={18} /></a>
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300"><Linkedin size={18} /></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300" aria-label="Follow us on Instagram"><Instagram size={18} aria-hidden="true"/></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300" aria-label="Follow us on Twitter"><Twitter size={18} aria-hidden="true"/></a>
+                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition duration-300" aria-label="Connect with us on LinkedIn"><Linkedin size={18} aria-hidden="true"/></a>
                     </div>
                 </div>
                 <div className="border-t border-white/5 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between text-gray-500 text-sm">
@@ -1864,7 +1930,7 @@ export default function App() {
                     <div className="flex gap-6 justify-center md:justify-end mt-4 md:mt-0">
                         <button onClick={() => setView('terms')} className="hover:text-purple-500 transition">Terms of Service</button>
                         <button onClick={() => setView('refund')} className="hover:text-purple-500 transition">Refund Policy</button>
-                        <button onClick={() => setView('login')} className="hover:text-purple-500 transition">-</button>
+                        <button onClick={() => setView('login')} className="hover:text-purple-500 transition" aria-label="Admin Login">-</button>
                     </div>
                 </div>
             </div>
@@ -1923,10 +1989,18 @@ export default function App() {
 
             <ThreeDBackground />
             
+            {/* Dynamic SEO Meta Tags based on view */}
+            {view === 'home' && <MetaController title="Home" description="Creatix is a leading digital agency providing top-tier web development, app creation, and digital marketing services." />}
+            {view === 'team' && <MetaController title="Our Team" description="Meet the expert minds behind Creatix - Developers, Designers, and Strategists committed to your success." />}
+            {view === 'service-details' && selectedService && <MetaController title={selectedService.title} description={selectedService.shortDesc} />}
+            {view === 'terms' && <MetaController title="Terms of Service" description="Read our terms and conditions regarding payments, project timelines, and deliverables." />}
+            {view === 'refund' && <MetaController title="Refund Policy" description="Understand our refund policies for booking fees and project cancellations." />}
+            {view === 'login' && <MetaController title="Admin Login" description="Secure login portal for Creatix administrators." />}
+            
             {view !== 'login' && <Navbar />}
 
             {view === 'home' && (
-                <>
+                <main>
                     <Hero />
                     <StatsSection />
                     <ServicesSection />
@@ -1934,7 +2008,7 @@ export default function App() {
                     <Testimonials />
                     <FAQSection />
                     <ContactForm />
-                </>
+                </main>
             )}
 
             {view === 'team' && <TeamPage />}
