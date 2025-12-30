@@ -1,14 +1,3 @@
-/**
- * DEPLOYMENT INSTRUCTIONS:
- * 1. If deploying locally or to Vercel/Netlify using Vite:
- * - Create a new project: `npm create vite@latest my-app -- --template react`
- * - Install dependencies: `npm install lucide-react`
- * - Setup Tailwind CSS (see tailwind docs)
- * - Copy THIS entire file content into `src/App.jsx`
- * - Ensure your `src/main.jsx` imports this App correctly.
- * * 2. Assets:
- * - Place 'creatix_logo.png' in the 'public' folder (Note: ensure file extension matches).
- */
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
@@ -31,7 +20,7 @@ const servicesData = [
         icon: 'Globe',
         shortDesc: 'Custom, responsive, and high-performance websites.',
         longDesc: 'Choose the perfect technology stack for your business. We offer specialized packages for WordPress, Shopify, and Custom Development designed to scale with you.',
-        rate: 'Starts ₹2,999',
+        rate: 'Starts ₹4,999',
         hasPackages: true,
         subCategories: [
             {
@@ -42,7 +31,7 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "2,999", 
+                        price: "4,999", 
                         features: [
                             "1-3 Pages Professional Setup", 
                             "Free Theme Installation", 
@@ -58,7 +47,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "7,999", 
+                        price: "9,999", 
                         features: [
                             "Everything in Basic +",
                             "5-7 Pages Complete Website", 
@@ -68,13 +57,13 @@ const servicesData = [
                             "Security Firewall (Wordfence)", 
                             "Google Analytics Integration",
                             "Image Compression Setup",
-                            "1 Month Technical Support",
+                            "15 Days Technical Support",
                             "Note: Hosting & Domain Charged Extra"
                         ] 
                     },
                     { 
                         name: "Premium", 
-                        price: "14,999", 
+                        price: "17,999", 
                         features: [
                             "Everything in Standard +",
                             "10-15 Pages / E-commerce Setup", 
@@ -84,7 +73,7 @@ const servicesData = [
                             "User Login/Register System", 
                             "Automated Backup Setup", 
                             "Pop-up / Lead Gen Form",
-                            "3 Months Priority Support",
+                            "1 Months Priority Support",
                             "Note: Hosting & Domain Charged Extra"
                         ] 
                     }
@@ -98,7 +87,7 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "999", 
+                        price: "6,999", 
                         features: [
                             "Store Setup & Account Config", 
                             "Free Theme Installation", 
@@ -113,7 +102,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "4,999", 
+                        price: "12,999", 
                         features: [
                             "Everything in Basic +",
                             "Premium Theme Setup (License Extra)", 
@@ -123,13 +112,13 @@ const servicesData = [
                             "Newsletter / Email Signup Popup", 
                             "Product Review App Setup", 
                             "Trust Badges Integration",
-                            "1 Month Store Support",
+                            "15 Days Store Support",
                             "Note: Shopify Plan Billed to Client"
                         ] 
                     },
                     { 
                         name: "Premium", 
-                        price: "9,999", 
+                        price: "19,999", 
                         features: [
                             "Everything in Standard +",
                             "Custom Liquid Code Modifications", 
@@ -139,7 +128,7 @@ const servicesData = [
                             "Instagram/Facebook Shop Sync", 
                             "Order Tracking Page Setup", 
                             "Speed Optimization Audit",
-                            "Priority Chat Support",
+                            "1 month Priority Support",
                             "Note: Shopify Plan Billed to Client"
                         ] 
                     }
@@ -153,7 +142,7 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "4,999", 
+                        price: "9,999", 
                         features: [
                             "Single Page / Landing Page Dev", 
                             "HTML5/CSS3/React Clean Code", 
@@ -169,7 +158,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "14,999", 
+                        price: "19,999", 
                         features: [
                             "Everything in Basic +",
                             "5-7 Pages Multi-page Website", 
@@ -179,13 +168,13 @@ const servicesData = [
                             "Dynamic Routing Setup", 
                             "SEO Friendly Structure (Next.js)", 
                             "API Integration (Basic)", 
-                            "1 Month Maintenance",
+                            "15 Days Maintenance",
                             "Note: UI Design Charged Extra"
                         ] 
                     },
                     { 
                         name: "Premium", 
-                        price: "29,999", 
+                        price: "39,999", 
                         features: [
                             "Everything in Standard +",
                             "Full Stack Architecture (MERN)", 
@@ -195,7 +184,7 @@ const servicesData = [
                             "Admin Dashboard Development", 
                             "Search & Filter Functionality", 
                             "Cloud Deployment (AWS/Vercel)", 
-                            "3 Months Bug Fix Support",
+                            "1 Month Bug Fix Support",
                             "Note: UI Design Charged Extra"
                         ] 
                     }
@@ -286,7 +275,7 @@ const servicesData = [
         icon: 'Smartphone',
         shortDesc: 'Native and cross-platform mobile applications.',
         longDesc: 'Turn your ideas into powerful mobile experiences. We develop intuitive, feature-rich iOS and Android apps using the latest technologies like React Native and Flutter.',
-        rate: 'Starts ₹14,999',
+        rate: 'Starts ₹49,999',
         hasPackages: true,
         subCategories: [
             {
@@ -297,7 +286,7 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "14,999", 
+                        price: "49,999", 
                         features: [
                             "WebView / Wrapper Application", 
                             "Convert Website to Android App", 
@@ -313,7 +302,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "49,999", 
+                        price: "99,999", 
                         features: [
                             "React Native / Flutter Development", 
                             "Up to 5 Custom Screens Setup", 
@@ -329,7 +318,7 @@ const servicesData = [
                     },
                     { 
                         name: "Premium", 
-                        price: "99,999", 
+                        price: "1,49,999", 
                         features: [
                             "Everything in Standard +",
                             "Full Custom Backend (Node.js)", 
@@ -339,7 +328,7 @@ const servicesData = [
                             "Real-time Chat / Notifications", 
                             "Complex Database Structure", 
                             "IOS Version Generation", 
-                            "4 Months Priority Support",
+                            "1 Month Priority Support",
                             "Note: Server Costs Billed to Client"
                         ] 
                     }
@@ -369,10 +358,10 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "4,999", 
+                        price: "6,999", 
                         features: [
                             "2 Social Platforms Managed", 
-                            "8 High-Quality Static Posts/mo", 
+                            "10 High-Quality Static Posts + 1 Reel/mo", 
                             "Basic Caption Copywriting", 
                             "Niche Hashtag Research", 
                             "Monthly Content Scheduling", 
@@ -411,8 +400,9 @@ const servicesData = [
                             "Advanced Ad Campaign Management", 
                             "24/7 Reputation Management", 
                             "Crisis Management Support", 
-                            "On-Site Content Creation (Local)",
-                            "Note: Ad Budget Billed to Client"
+                            "Tapes and Raw photos provided by Client",
+                            "Note: Ad Budget Billed to Client",
+                            
                         ] 
                     }
                 ]
@@ -466,7 +456,7 @@ const servicesData = [
                             "Trending Viral Styles", 
                             "B-Roll Integration", 
                             "Beat Sync Editing",
-                            "Unlimited Revisions"
+                            "5 Revisions"
                         ] 
                     },
                     { 
@@ -494,7 +484,7 @@ const servicesData = [
                 plans: [
                     { 
                         name: "Basic", 
-                        price: "2,999", 
+                        price: "3,999", 
                         features: [
                             "Up to 5 Mins Duration", 
                             "Narrative Story Cutting", 
@@ -509,7 +499,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "6,999", 
+                        price: "9,999", 
                         features: [
                             "Everything in Basic +",
                             "Up to 15 Mins Duration", 
@@ -588,7 +578,7 @@ const servicesData = [
                             "Social Media Profile Kit", 
                             "Typography & Fonts Guide", 
                             "Print-Ready Files (CMYK)", 
-                            "Unlimited Revisions",
+                            "4 Revisions",
                             "Priority Support"
                         ] 
                     },
@@ -632,7 +622,7 @@ const servicesData = [
                     },
                     { 
                         name: "Standard", 
-                        price: "14,999", 
+                        price: "9,999", 
                         features: [
                             "Everything in Basic +",
                             "High Fidelity UI Design", 
@@ -642,13 +632,13 @@ const servicesData = [
                             "Basic Style Guide Creation", 
                             "Iconography Set", 
                             "Developer Handoff Support",
-                            "Unlimited Revisions",
+                            "5 Revisions per Screen",
                             "Note: No Coding/Development"
                         ] 
                     },
                     { 
                         name: "Premium", 
-                        price: "29,999", 
+                        price: "19,999", 
                         features: [
                             "Everything in Standard +",
                             "Complete Design System", 
@@ -702,17 +692,24 @@ const faqs = [
 const teamMembers = [
     { 
         name: "Arpan Kusum", 
-        role: "Founder & CEO", 
+        role: "Founder", 
         img: "https://madhuramsliet.com/assets/avatars/arpanku.jpg", 
         instagram: "https://instagram.com/arpanksm_",
         linkedin: "https://linkedin.com/in/arpan-kusum-559279224/" 
     },
     { 
         name: "Pawan Sharma", 
-        role: "Co-Founder & CTO", 
+        role: "Co-Founder", 
         img: "https://media.licdn.com/dms/image/v2/D5603AQFu0Tt1RZMi0w/profile-displayphoto-scale_400_400/B56ZrGPE.zJ8Ak-/0/1764262434806?e=1768435200&v=beta&t=mCKtqv0dV0YNyR3Wea8rdPLGamO-oLsAEre6Y29li30",
         instagram: "https://instagram.com/pawansharmma5",
         linkedin: "https://linkedin.com/in/pawan-sharma-4b07b921b/" 
+    },
+    { 
+        name: "Prakhyat Prakhar", 
+        role: "Co-Founder", 
+        img: "https://madhuramsliet.com/assets/avatars/prakhyat.jpg",
+        instagram: "#",
+        linkedin: "https://www.linkedin.com/in/prakhyat-prakhar/?originalSubdomain=in" 
     }
 ];
 
@@ -1390,7 +1387,7 @@ export default function App() {
                                     <h3 className="text-2xl font-bold mb-4 font-display">{service.title}</h3>
                                     <p className="text-gray-400 text-sm mb-8 leading-relaxed">{service.shortDesc}</p>
                                     <div className="flex items-center justify-between border-t border-white/5 pt-6">
-                                        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Starting at {service.rate.replace('Starting at ', '')}</span>
+                                        <span className="text-xs font-bold uppercase tracking-wider text-gray-500">{service.rate.replace('Starting at ', '')}</span>
                                         <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-600 transition duration-300">
                                             <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white" />
                                         </div>
